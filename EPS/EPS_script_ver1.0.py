@@ -110,7 +110,6 @@ def loop():
     v_t = v1 + v2 #Combined Total Voltage
     if v_t <= CRITIC_VOLT: #Emergency shut down
         shut_down()
-    
     print("Current voltage of 2 cell battery pack is: {f}".format(v_t))
     print(f"{find_power_percent(v1,v2)}\% power remaining")
     light_led(v_t)
