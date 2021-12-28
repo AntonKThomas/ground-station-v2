@@ -108,7 +108,7 @@ def loop():
     v1 = chan_1.voltage #Cell 1
     v2 = chan_2.voltage #Cell 2
     v_t = v1 + v2 #Combined Total Voltage
-    if v_t <= CRITIC_VOLT: #Emergency shut sown
+    if v_t <= CRITIC_VOLT: #Emergency shut down
         shut_down()
     
     print("Current voltage of 2 cell battery pack is: {f}".format(v_t))
