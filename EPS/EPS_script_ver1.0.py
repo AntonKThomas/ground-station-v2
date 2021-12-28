@@ -105,16 +105,19 @@ def setup():
     
 #Continuous loop for script to follow during on time
 def loop():
-    while True:
-        v1 = chan_1.voltage #Cell 1
-        v2 = chan_2.voltage #Cell 2
-        v_t = v1 + v2 #Combined Total Voltage
-        print("Current voltage of 2 cell battery pack is: {f}".format(v_t))
-        print(f"{find_power_percent(v1,v2)}\% power remaining")
-        light_led(v_t)
-        time.sleep(READING_DELAY) #Could be good idea to do multithreading to run all processes simultaniously
+    v1 = chan_1.voltage #Cell 1
+    v2 = chan_2.voltage #Cell 2
+    v_t = v1 + v2 #Combined Total Voltage
+    if v_t <= CRITIC_VOLT: #Emergency shut sown
+        shut_down()
+    
+    print("Current voltage of 2 cell battery pack is: {f}".format(v_t))
+    print(f"{find_power_percent(v1,v2)}\% power remaining")
+    light_led(v_t)
+    time.sleep(READING_DELAY) #Could be good idea to do multithreading to run all processes simultaniously
 
 
 if __name__ == '__main__':
     setup()
-    loop()
+    while True:
+        loop()
